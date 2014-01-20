@@ -6,7 +6,7 @@
     "dependencies": {
         "express": "3.x",
         "consolidate": "0.9.1",
-        "aync": "0.2.9",
+        "async": "0.2.9",
         "request": "2.30.0"
     }
 }
