@@ -8,15 +8,22 @@ body {
 }
 
 circle {
-  stroke: white;
-  stroke-width: 1px;
+  stroke: lightgrey;
+  stroke-width: 2px;
 }
 
 .recipe {
   fill: #2c442e;
 }
+.recipe:hover {
+  fill: #d3a86c;
+}
+
 .ingredient {
   fill: #7e9560;
+}
+.ingredient:hover {
+  fill: #d3a86c;
 }
 .link {
   pointer-events: none;
