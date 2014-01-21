@@ -2,7 +2,7 @@ d3.json("ing/12", function (error, response) {
   var app = appStart();
 
   app.force
-    .charge(-250)
+    .charge(-500)
     .linkDistance(150)
     .nodes([])
     .links([])
