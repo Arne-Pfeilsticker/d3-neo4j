@@ -3,7 +3,7 @@ var fs = require('fs'),
     request = require('request');
 
 var inputFile = 'data/recipe-relations.json';
-var dataURL = 'http://localhost:7474/db/data/';
+var dataURL = 'http://graphs.delimited.io:7474/db/data/';
 
 var q = async.queue(runTask, 1);
 
