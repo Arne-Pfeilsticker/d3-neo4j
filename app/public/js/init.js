@@ -92,18 +92,10 @@ window.appStart = function () {
     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
   };
 
-  p.resize = function () {
-    var chart = $("#graph-svg");
-    chart.attr("width", chart.parent().width());
-    chart.attr("height", chart.parent().height());
-    force.size([chart.parent().width(), chart.parent().height()]);
-    force.start(); 
-  };
-
   p.dblclick = function (d) {
     if (d.properties.label === "Recipe"){
       d3.select(this).classed("fixed", d.fixed = false);
-      force.start();
+      p.force.start();
     } else {
       p.getData(d);
     }
