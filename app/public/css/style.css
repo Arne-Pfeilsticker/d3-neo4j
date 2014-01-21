@@ -1,0 +1,29 @@
+body {
+  background: #e7e7de;
+}
+
+circle {
+  stroke: white;
+  stroke-width: 1px;
+}
+
+.recipe {
+  fill: #2c442e;
+}
+.ingredient {
+  fill: #7e9560;
+}
+.link {
+  pointer-events: none;
+  stroke: #966e35;
+  stroke-opacity: .4;
+}
+
+.selected circle {
+  fill: yellow; 
+}
+
+.fixed circle{
+  stroke: tomato;
+  stroke-width: 3px;
+}
