@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<style>
+body {
+  background: #e7e7de;
+}
+.node {
+  stroke: #ccc;
+  stroke-width: 1.5px;
+}
+
+.link {
+  stroke: #966e35;
+  stroke-opacity: .4;
+}
+
+</style>
+<body>
+<script src="lib/d3.js"></script>
+<script src="lib/underscore.js"></script>
+<script src="lib/jquery.js"></script>
+<script>
+var width = 960,
+    height = 500;
+
+var color = d3.scale.category20();
+
+var force = d3.layout.force()
+    .charge(-250)
+    .linkDistance(150)
+    .size([width, height]);
+
+var svg = d3.select("body").append("svg")
+    .attr("width", width)
+    .attr("height", height);
+
+d3.json("ing/10", function(error, response) {
+  var nodes = {}, links = [];
+  var data = response[0].data
+
+  _.each(data, function (relation) {
+    _.each(relation.graph.nodes, function (node) {
+      if (!nodes[node.id]) nodes[node.id] = node;
+    });
+    addLinks(relation)
+  });
+
+  function addLinks(d) {
+    _.each(d.graph.relationships, function (r) {
+      links.push({source: nodes[r.startNode], target: nodes[r.endNode]})
+    })
+  }
+
+  force
+      .nodes(_.toArray(nodes))
+      .links(links)
+      .start();
+
+  var link = svg.selectAll(".link")
+      .data(links)
+    .enter().append("line")
+      .attr("class", "link")
+      .style("stroke-width", "2px");
+
+  var node = svg.selectAll(".node")
+      .data(_.toArray(nodes))
+    .enter().append("g")
+      .attr("class", "node")
+      .call(force.drag);
+
+
+  node.append("circle")
+    .attr("class", "node")
+    .attr("r", function (d) { return d.properties.label === "Recipe" ? 15: 10; })
+    .style("fill", function (d) { return d.properties.label === "Recipe" ? "#2c442e": "#7e9560"; })
+
+  node.append("text")
+      .attr("dx", 12)
+      .attr("dy", ".35em")
+      .text(function(d) { return d.properties.name });
+
+  force.on("tick", function() {
+    link.attr("x1", function(d) { return d.source.x; })
+        .attr("y1", function(d) { return d.source.y; })
+        .attr("x2", function(d) { return d.target.x; })
+        .attr("y2", function(d) { return d.target.y; });
+
+     node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; });
+  });
+
+});
+
+function resize () {
+  var chart = $("#main-svg");
+  chart.attr("width", chart.parent().width());
+  chart.attr("height", chart.parent().height());
+  force.size([chart.parent().width(), chart.parent().height()]);
+  force.start(); 
+}
+
+$(document).ready(function() {
+  resize();
+});
+
+$(window).on("resize", function() {
+  resize();
+</script>
