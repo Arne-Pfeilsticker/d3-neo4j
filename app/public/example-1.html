@@ -31,6 +31,7 @@ var force = d3.layout.force()
     .size([width, height]);
 
 var svg = d3.select("body").append("svg")
+    .attr("id", "graph-svg")
     .attr("width", width)
     .attr("height", height);
 
@@ -91,7 +92,7 @@ d3.json("ing/10", function(error, response) {
 });
 
 function resize () {
-  var chart = $("#main-svg");
+  var chart = $("#graph-svg");
   chart.attr("width", chart.parent().width());
   chart.attr("height", chart.parent().height());
   force.size([chart.parent().width(), chart.parent().height()]);
@@ -104,4 +105,5 @@ $(document).ready(function() {
 
 $(window).on("resize", function() {
   resize();
+});
 </script>
