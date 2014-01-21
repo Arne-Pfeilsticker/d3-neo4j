@@ -27,7 +27,7 @@ circle {
 .selected circle {
   stroke: #966e35;
   stroke-width: 3px;
-  fill: yellow; 
+  fill: #611400; 
 }
 
 .fixed circle{
