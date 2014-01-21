@@ -35,8 +35,8 @@ window.appStart = function () {
     node = node.data(force.nodes(), function(d) { return d.id;});
     node.enter().append("g")
       .attr("class", "node")
-      .on("dblclick", this.dblclick)
-      .call(force.drag);
+      .on("dblclick", p.dblclick)
+      .call(p.force.drag);
 
     node.append("circle")
       .attr("class", function (d) { return d.properties.label === "Recipe" ? "recipe": "ingredient"; })
