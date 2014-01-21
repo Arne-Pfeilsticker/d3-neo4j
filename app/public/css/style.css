@@ -2,6 +2,11 @@ body {
   background: #e7e7de;
 }
 
+#svg-container {
+  border: 3px solid black;
+  border-radius: 8px;
+}
+
 circle {
   stroke: white;
   stroke-width: 1px;
@@ -20,6 +25,8 @@ circle {
 }
 
 .selected circle {
+  stroke: #966e35;
+  stroke-width: 3px;
   fill: yellow; 
 }
 

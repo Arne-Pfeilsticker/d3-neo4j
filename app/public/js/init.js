@@ -1,7 +1,7 @@
 window.appStart = function () {
   var width = 900, height = 800;
 
-  var svg = d3.select("body").append("svg")
+  var svg = d3.select("#svg-container").append("svg")
     .attr("id", "graph-svg")
     .attr("width", width)
     .attr("height", height);
