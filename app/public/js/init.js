@@ -79,8 +79,8 @@ window.appStart = function () {
     var chart = $("#graph-svg");
     chart.attr("width", chart.parent().width());
     chart.attr("height", chart.parent().height());
-    force.size([chart.parent().width(), chart.parent().height()]);
-    force.start(); 
+    p.force.size([chart.parent().width(), chart.parent().height()]);
+    p.force.start(); 
   }
 
   p.tick = function() {
