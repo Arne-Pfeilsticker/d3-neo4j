@@ -1,11 +1,9 @@
-var fs = require('fs'),
-    async = require('async'),
+var fs =      require('fs'),
+    async =   require('async'),
     request = require('request');
 
-var inputFile = 'data/recipe-relations.json';
-var dataURL = 'http://graphs.delimited.io:7474/db/data/';
-
-var q = async.queue(runTask, 1);
+var dataURL = '';
+var q = async.queue(runTask, 1); // You will duplicate nodes if you change the "1" here!
 
 function runTask(d, callback) {
   checkRelationExists(d, function (err, exists) {
@@ -25,12 +23,16 @@ function runTask(d, callback) {
 
 q.drain = function() { console.log('Finished.'); };
 
-fs.readFile(inputFile, 'utf-8', function (err, data) {
-  var relations = JSON.parse(data);
-  relations.forEach(function (relation) {
-    q.push(relation);
+exports.insert = function (inputFile, url) {
+  dataURL = url;
+  fs.readFile(inputFile, 'utf-8', function (err, data) {
+    if (err) throw err;
+    var relations = JSON.parse(data);
+    relations.forEach(function (relation) {
+      q.push(relation);
+    });
   });
-});
+}
 
 function checkRelationExists(d, callback) {
   var options = getOptions(d, 'REL_MATCH');
