@@ -19,7 +19,6 @@ function queryNode(nodeID, cb) {
       request.post(options, function (err, response, body) {
         if (err) return callback(err);
         if (body.data != undefined && response.statusCode === 200) {
-          console.log("one")
           return callback(null, body.data);
         } else {
           return callback(new Error('GET_RECIPES: '+ response.body.message));
@@ -32,7 +31,6 @@ function queryNode(nodeID, cb) {
       request.post(options, function (err, response, body) {
         if (err) return callback(err);
         if (body.data && response.statusCode === 200) {
-          console.log("two")
           return callback(null, rcps, body.data);
         } else {
           return callback(new Error('GET_INGREDS: '+ response.body.message));
@@ -44,7 +42,6 @@ function queryNode(nodeID, cb) {
       request.post(options, function (err, response, body) {
         if (err) return callback(err);
         if (body.results && response.statusCode === 201) {
-          console.log("three")
           return callback(null, body.results);
         } else {
           return callback(new Error('GET_RELATIONS: '+ response));
