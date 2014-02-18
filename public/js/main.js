@@ -1,26 +1,25 @@
-d3.json("ing/12", function (error, response) {
-  var app = appStart();
+d3.json("ing/7", function (error, response) {
 
-  app.force
+  APP.force
     .charge(-500)
     .linkDistance(150)
     .nodes([])
     .links([])
-    .on("tick", app.tick)
-    .drag().on("dragstart", app.dragstart);
-    
-  var graph = app.createNodesLinks(response[0].data)
-  app.force.nodes(graph.nodes);
-  app.force.links(graph.links);
+    .on("tick", APP.tick)
+    .drag().on("dragstart", APP.dragstart)
 
-  app.updateNodes("10", app.force);
+  var graph = APP.createNodesLinks(response[0].data)
+  APP.force.nodes(graph.nodes);
+  APP.force.links(graph.links);
+
+  APP.updateNodes("10", APP.force);
 
   $(document).ready(function() {
-    app.resize();
+    APP.resize();
   });
 
   $(window).on("resize", function() {
-    app.resize();
+    APP.resize();
   });
 });
 
